@@ -27,6 +27,7 @@ export class SideBarComponent {
         {
           label: 'Ver',
           icon: 'pi pi-fw pi-eye',
+          routerLink: ""
         },
         {
           label: 'Nuevo',
