@@ -5,7 +5,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { ImageModule } from 'primeng/image';
-import { img_paths } from '../../../global/constants';
+import { img_paths } from '@constants';
 
 @Component({
   selector: 'app-login',

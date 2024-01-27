@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { img_paths } from '../../../global/constants';
+import { img_paths } from '@constants';
 import { StyleClassModule } from 'primeng/styleclass';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';

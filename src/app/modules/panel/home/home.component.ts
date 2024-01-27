@@ -10,10 +10,6 @@ import { RouterOutlet } from '@angular/router';
     styleUrl: './home.component.css',
     templateUrl: './home.component.html'
 })
-export class HomeComponent implements OnInit {
-
-
-  ngOnInit(): void {
-  }
+export class HomeComponent {
 
 }
