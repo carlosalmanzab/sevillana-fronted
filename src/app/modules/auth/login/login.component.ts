@@ -21,6 +21,6 @@ import { img_paths } from '@constants';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export default class LoginComponent {
   imgBackground = img_paths.backgroundLogin;
 }

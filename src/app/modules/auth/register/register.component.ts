@@ -31,7 +31,7 @@ import { DividerModule } from 'primeng/divider';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
-export class RegisterComponent {
+export default class RegisterComponent {
   imgBackground = img_paths.backgroundRegister;
   roles = [
     { rol: 'empleado' },

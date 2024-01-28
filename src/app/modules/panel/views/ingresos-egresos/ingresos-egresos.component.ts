@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './ingresos-egresos.component.html',
   styleUrl: './ingresos-egresos.component.css'
 })
-export class IngresosEgresosComponent {
+export default class IngresosEgresosComponent {
 
 }
