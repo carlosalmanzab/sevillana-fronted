@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './inventario-materia-prima.component.html',
   styleUrl: './inventario-materia-prima.component.css'
 })
-export class InventarioMateriaPrimaComponent {
+export default class InventarioMateriaPrimaComponent {
 
 }

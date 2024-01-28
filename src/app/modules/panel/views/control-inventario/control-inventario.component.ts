@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './control-inventario.component.html',
   styleUrl: './control-inventario.component.css'
 })
-export class ControlInventarioComponent {
+export default class ControlInventarioComponent {
 
 }

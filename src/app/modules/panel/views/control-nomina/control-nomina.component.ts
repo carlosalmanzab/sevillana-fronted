@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './control-nomina.component.html',
   styleUrl: './control-nomina.component.css'
 })
-export class ControlNominaComponent {
+export default class ControlNominaComponent {
 
 }

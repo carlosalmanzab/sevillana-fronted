@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './cuentas-por-cobrar.component.html',
   styleUrl: './cuentas-por-cobrar.component.css'
 })
-export class CuentasPorCobrarComponent {
+export default class CuentasPorCobrarComponent {
 
 }
