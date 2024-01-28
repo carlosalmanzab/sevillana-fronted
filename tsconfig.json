@@ -2,9 +2,16 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "/",
+    "baseUrl": "./",
     "paths": {
-      "@images/*": ["src/assets/images/*"]
+      "@core/*": ["src/app/core/*"],
+      "@data/*": ["src/app/data/*"],
+      "@assets/*": ["src/assets/*"],
+      "@shared/*": ["src/app/shared/*"],
+      "@modules/*": ["src/app/modules/*"],
+      "@environments/*": ["src/environments/*"],
+      "@constants": ["src/app/global/constants"],
+      "@endpoints": ["src/app/global/endpoints"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
