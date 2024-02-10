@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { img_paths } from '../../shared/enums/image-paths';
+import { img_paths } from '@constants';
 import { StyleClassModule } from 'primeng/styleclass';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -31,7 +31,7 @@ import { DividerModule } from 'primeng/divider';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
-export class RegisterComponent {
+export default class RegisterComponent {
   imgBackground = img_paths.backgroundRegister;
   roles = [
     { rol: 'empleado' },
