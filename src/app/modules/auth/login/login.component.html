@@ -1,67 +1,30 @@
 <div class="grid grid-nogutter">
+	<div class="col-12 md:col-5 surface-card p-4 shadow-2 border-round h-screen">
+		<div class="text-center mb-5">
+			<div class="text-900 text-3xl font-medium mb-3">¡Bienvenido de regreso!</div>
+			<span class="text-600 font-medium line-height-3">¿No tienes una cuenta?</span>
+			<a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Crear ahora!</a>
+		</div>
 
-  <div class="col-12 md:col-5 surface-card p-4 shadow-2 border-round h-screen">
-    <div class="text-center mb-5">
-      <div class="text-900 text-3xl font-medium mb-3">
-        ¡Bienvenido de regreso!
-      </div>
-      <span class="text-600 font-medium line-height-3"
-        >¿No tienes una cuenta?</span
-      >
-      <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
-        >Crear ahora!</a
-      >
-    </div>
+		<div>
+			<label for="user1" class="block text-900 font-medium mb-2">Usuario</label>
+			<input id="user1" type="text" placeholder="usuario" pInputText class="w-full mb-3" />
 
-    <div>
-      <label for="user1" class="block text-900 font-medium mb-2">Usuario</label>
-      <input
-        id="user1"
-        type="text"
-        placeholder="usuario"
-        pInputText
-        class="w-full mb-3"
-      />
+			<label for="password1" class="block text-900 font-medium mb-2">Contraseña</label>
+			<input id="password1" type="password" placeholder="Contraseña" pInputText class="w-full mb-3" />
 
-      <label for="password1" class="block text-900 font-medium mb-2"
-        >Contraseña</label
-      >
-      <input
-        id="password1"
-        type="password"
-        placeholder="Contraseña"
-        pInputText
-        class="w-full mb-3"
-      />
+			<div class="flex align-items-center justify-content-between mb-6">
+				<div class="flex align-items-center">
+					<p-checkbox id="rememberme" [binary]="true" styleClass="mr-2"></p-checkbox>
+					<label for="rememberme1">Recuérdame</label>
+				</div>
+				<a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">¿Olvidó su contraseña?</a>
+			</div>
+			<button pButton pRipple aria-label="Ingresar" label="Ingresar" icon="pi pi-user" class="w-full"></button>
+		</div>
+	</div>
 
-      <div class="flex align-items-center justify-content-between mb-6">
-        <div class="flex align-items-center">
-          <p-checkbox
-            id="rememberme"
-            [binary]="true"
-            styleClass="mr-2"
-          ></p-checkbox>
-          <label for="rememberme1">Recuérdame</label>
-        </div>
-        <a
-          class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer"
-          >¿Olvidó su contraseña?</a
-        >
-      </div>
-      <button
-        pButton
-        pRipple
-        aria-label="Ingresar"
-        label="Ingresar"
-        icon="pi pi-user"
-        class="w-full"
-      ></button>
-    </div>
-
-  </div>
-
-  <div class="col-0 md:col-7 overflow-hidden">
-    <p-image [src]="imgBackground" class="w-3 h-screen" width="100%" height="100%"  alt="background1" ></p-image>
-  </div>
-
+	<div class="col-0 md:col-7 overflow-hidden">
+		<p-image [src]="imgBackground" class="w-3 h-screen" width="100%" height="100%" alt="background1"></p-image>
+	</div>
 </div>

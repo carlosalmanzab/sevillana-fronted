@@ -13,29 +13,25 @@ import { PasswordModule } from 'primeng/password';
 import { DividerModule } from 'primeng/divider';
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [
-    StyleClassModule,
-    InputTextModule,
-    ButtonModule,
-    RippleModule,
-    ImageModule,
-    InputGroupModule,
-    InputGroupAddonModule,
-    InputNumberModule,
-    DropdownModule,
-    PasswordModule,
-    DividerModule
-  ],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css',
+	selector: 'app-register',
+	standalone: true,
+	imports: [
+		StyleClassModule,
+		InputTextModule,
+		ButtonModule,
+		RippleModule,
+		ImageModule,
+		InputGroupModule,
+		InputGroupAddonModule,
+		InputNumberModule,
+		DropdownModule,
+		PasswordModule,
+		DividerModule
+	],
+	templateUrl: './register.component.html',
+	styleUrl: './register.component.css'
 })
 export default class RegisterComponent {
-  imgBackground = img_paths.backgroundRegister;
-  roles = [
-    { rol: 'empleado' },
-    { rol: 'administrador' },
-    { rol: 'desarrollador' },
-  ];
+	imgBackground = img_paths.backgroundRegister;
+	roles = [{ rol: 'empleado' }, { rol: 'administrador' }, { rol: 'desarrollador' }];
 }

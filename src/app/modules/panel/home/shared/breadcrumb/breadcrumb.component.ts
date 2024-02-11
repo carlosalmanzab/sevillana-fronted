@@ -2,15 +2,12 @@ import { Component } from '@angular/core';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 
 @Component({
-  selector: 'app-breadcrumb',
-  standalone: true,
-  imports: [BreadcrumbModule],
-  templateUrl: './breadcrumb.component.html',
-  styleUrl: './breadcrumb.component.css'
+	selector: 'app-breadcrumb',
+	standalone: true,
+	imports: [BreadcrumbModule],
+	templateUrl: './breadcrumb.component.html',
+	styleUrl: './breadcrumb.component.css'
 })
 export class BreadcrumbComponent {
-  items = [        { label: 'Home' },
-  { label: 'Products' },
-  { label: 'Product A' }];
-
+	items = [{ label: 'Home' }, { label: 'Products' }, { label: 'Product A' }];
 }
