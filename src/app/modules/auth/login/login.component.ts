@@ -8,19 +8,12 @@ import { ImageModule } from 'primeng/image';
 import { img_paths } from '@constants';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [
-    StyleClassModule,
-    CheckboxModule,
-    InputTextModule,
-    ButtonModule,
-    RippleModule,
-    ImageModule
-  ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+	selector: 'app-login',
+	standalone: true,
+	imports: [StyleClassModule, CheckboxModule, InputTextModule, ButtonModule, RippleModule, ImageModule],
+	templateUrl: './login.component.html',
+	styleUrl: './login.component.css'
 })
 export default class LoginComponent {
-  imgBackground = img_paths.backgroundLogin;
+	imgBackground = img_paths.backgroundLogin;
 }
