@@ -3,12 +3,17 @@ import { HomeComponent } from '@modules/panel/home/home.component';
 
 export const routes: Routes = [
 	{
-		path: 'auth/login',
-		loadComponent: () => import('@modules/auth/login/login.component')
-	},
-	{
-		path: 'auth/register',
-		loadComponent: () => import('@modules/auth/register/register.component')
+		path: '',
+		children: [
+			{
+				path: 'auth/login',
+				loadComponent: () => import('@modules/auth/login/login.component')
+			},
+			{
+				path: 'auth/register',
+				loadComponent: () => import('@modules/auth/register/register.component')
+			}
+		]
 	},
 	{
 		path: 'home',
