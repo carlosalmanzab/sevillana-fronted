@@ -8,7 +8,9 @@
       "@data/*": ["src/app/data/*"],
       "@assets/*": ["src/assets/*"],
       "@shared/*": ["src/app/shared/*"],
+      "@domain/*": ["src/app/core/domain/*"],
       "@modules/*": ["src/app/modules/*"],
+      "@views/*": ["src/app/modules/panel/views/*"],
       "@environments/*": ["src/environments/*"],
       "@constants": ["src/app/global/constants"],
       "@endpoints": ["src/app/global/endpoints"]

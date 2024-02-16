@@ -1,0 +1,59 @@
+<p-table
+	[value]="productos"
+	[(selection)]="selectedProductos"
+	dataKey="codigo"
+	[tableStyle]="{ 'min-width': '50rem' }"
+	[paginator]="true"
+	[rows]="10"
+	[showCurrentPageReport]="true"
+	currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} registros"
+	[rowsPerPageOptions]="[10, 20, 50]"
+	[scrollable]="true"
+	scrollHeight="500px"
+	[resizableColumns]="true"
+>
+	<ng-template pTemplate="header">
+		<tr>
+			<th style="width: 4rem">
+				<p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+			</th>
+			<th>Codigo</th>
+			<th>Articulo</th>
+			<th>Fecha</th>
+			@if (isProductoStock()) {
+				<th>Entrada</th>
+				<th>Salida</th>
+				<th>Stock</th>
+			} @else if (isProductoEntrada()) {
+				<th>Entrada</th>
+			} @else if (isProductoSalida()) {
+				<th>Salida</th>
+			}
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="body" let-producto>
+		<tr>
+			<td>
+				<p-tableCheckbox [value]="producto"></p-tableCheckbox>
+			</td>
+			@if (isProductoStock()) {
+				<td>{{ producto.codigo }}</td>
+				<td>{{ producto.articulo }}</td>
+				<td>{{ producto.fecha }}</td>
+				<td>{{ producto.cantidadEntrada }}</td>
+				<td>{{ producto.cantidadSalida }}</td>
+				<td><p-tag [value]="producto.stock" [severity]="getStockSeverity(producto.stock)"> </p-tag></td>
+			} @else if (isProductoEntrada()) {
+				<td>{{ producto.codigo }}</td>
+				<td>{{ producto.articulo }}</td>
+				<td>{{ producto.fecha }}</td>
+				<td>{{ producto.cantidadEntrada }}</td>
+			} @else if (isProductoSalida()) {
+				<td>{{ producto.codigo }}</td>
+				<td>{{ producto.articulo }}</td>
+				<td>{{ producto.fecha }}</td>
+				<td>{{ producto.cantidadSalida }}</td>
+			}
+		</tr>
+	</ng-template>
+</p-table>
