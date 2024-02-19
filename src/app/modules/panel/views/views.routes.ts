@@ -19,7 +19,9 @@ export const routes: Routes = [
 	{
 		path: 'control-inventario',
 		title: 'Control de Inventario',
-		loadComponent: () => import('@modules/panel/views/control-inventario/control-inventario.component')
+		loadComponent: () => import('@modules/panel/views/control-inventario/control-inventario.component'),
+		loadChildren: () =>
+			import('@modules/panel/views/control-inventario/control-inventario.routes').then((r) => r.routes)
 	},
 	{
 		path: 'cuentas-cobrar',
