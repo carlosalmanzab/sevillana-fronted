@@ -4,6 +4,7 @@ import { DynamicTabsComponent } from '@views/shared/dynamic-tabs/dynamic-tabs.co
 import { MenuActionTableComponent } from '@views/shared/menu-action-table/menu-action-table.component';
 import { StockTableComponent } from '@views/shared/stock-table/stock-table.component';
 import { MenuItem } from 'primeng/api';
+import { client } from '@endpoints';
 
 @Component({
 	selector: 'app-control-inventario',
@@ -17,9 +18,9 @@ export default class ControlInventarioComponent {
 
 	constructor() {
 		this.items = [
-			{ label: 'Stock', routerLink: './stock' },
-			{ label: 'Entrada', routerLink: './entrada' },
-			{ label: 'Salida', routerLink: './salida' }
+			{ label: 'Stock', routerLink: client.routes.home.control_inventario.stock.relative },
+			{ label: 'Entrada', routerLink: client.routes.home.control_inventario.entrada.relative },
+			{ label: 'Salida', routerLink: client.routes.home.control_inventario.salida.relative }
 		];
 	}
 }
