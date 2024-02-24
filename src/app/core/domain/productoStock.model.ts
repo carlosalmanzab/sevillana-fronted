@@ -1,7 +1,7 @@
-import { Producto } from './producto.model';
+import { Producto } from '@domain/producto.model';
+import { ProductoEntrada } from '@domain/productoEntrada.model';
+import { ProductoSalida } from '@domain/productoSalida.model';
 
-export interface ProductoStock extends Producto {
-	cantidadEntrada?: number;
-	cantidadSalida?: number;
-	stock?: number;
+export interface ProductoStock extends Producto, ProductoEntrada, ProductoSalida {
+	stock: number;
 }
