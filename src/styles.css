@@ -1,3 +1,6 @@
-input.custom-width-number {
+input.custom-width-number{
   width: 100px;
+}
+input.custom-width-text {
+width: 22em;
 }
