@@ -1,3 +1,9 @@
 {
-	"conventionalCommits.scopes": ["routes", "views", "home", "endpoints", "domain", "table"]
+	"conventionalCommits.scopes": ["routes", "views", "home", "endpoints", "domain", "table"],
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "**/*.husky": true
+  }
 }
