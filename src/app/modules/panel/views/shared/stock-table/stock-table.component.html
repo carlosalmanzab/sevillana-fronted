@@ -12,9 +12,10 @@
 	[scrollable]="true"
 	scrollHeight="500px"
 	[resizableColumns]="true"
-	styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm"
+	styleClass="p-datatable-sm"
 	[filterDelay]="0"
 	[globalFilterFields]="globalFilterFieldsData()"
+	editMode="row"
 >
 	<ng-template pTemplate="caption"
 		><div class="flex align-items-center flex-wrap">
@@ -38,11 +39,7 @@
 			<th>
 				<p-tableHeaderCheckbox></p-tableHeaderCheckbox>
 			</th>
-			<th pSortableColumn="codigo">
-				<div class="flex justify-content-start align-items-center">
-					<span class="p-column-title">Codigo</span><p-sortIcon field="codigo" />
-				</div>
-			</th>
+			<th><i class="pi pi-hashtag"></i></th>
 			<th pSortableColumn="articulo">
 				<div class="flex justify-content-start align-items-center">
 					Articulo<p-sortIcon field="articulo" /><p-columnFilter type="text" field="articulo" display="menu" />
@@ -50,7 +47,7 @@
 			</th>
 			<th pSortableColumn="fecha">
 				<div class="flex justify-content-start align-items-center">
-					Fecha<p-sortIcon field="fecha" /><p-columnFilter type="date" field="fecha" display="" />
+					Fecha<p-sortIcon field="fecha" /><p-columnFilter type="date" field="fecha" display="menu" />
 				</div>
 			</th>
 			@if (isProductoEntrada() || isProductoStock()) {
@@ -74,25 +71,83 @@
 					</div>
 				</th>
 			}
+			<th><i class="pi pi-file-edit"></i></th>
 		</tr>
 	</ng-template>
-	<ng-template pTemplate="body" let-producto>
-		<tr>
+	<ng-template pTemplate="body" let-producto let-editing="editing" let-ri="rowIndex">
+		<tr [pEditableRow]="producto">
 			<td>
 				<p-tableCheckbox [value]="producto"></p-tableCheckbox>
 			</td>
 			<td>{{ producto.codigo }}</td>
-			<td>{{ producto.articulo }}</td>
-			<td>{{ producto.fecha | date: 'd/MM/yy, h:mm a' }}</td>
+			<td>
+				<p-cellEditor
+					><ng-template pTemplate="input"
+						><input pInputText type="text" [(ngModel)]="producto.articulo" required />
+					</ng-template>
+					<ng-template pTemplate="output"> {{ producto.articulo }}</ng-template>
+				</p-cellEditor>
+			</td>
+			<td>{{ producto.fecha | date: 'd/MM/yy, h a' }}</td>
 			@if (isProductoEntrada()) {
-				<td>{{ producto.cantidadEntrada }}</td>
+				<td class="field-number">
+					<p-cellEditor
+						><ng-template pTemplate="input"
+							><p-inputNumber inputStyleClass="custom-width-number" [(ngModel)]="producto.cantidadEntrada" />
+						</ng-template>
+						<ng-template pTemplate="output"> {{ producto.cantidadEntrada }}</ng-template>
+					</p-cellEditor>
+				</td>
 			}
 			@if (isProductoSalida()) {
-				<td>{{ producto.cantidadSalida }}</td>
+				<td>
+					<p-cellEditor
+						><ng-template pTemplate="input"
+							><p-inputNumber inputStyleClass="custom-width-number" [(ngModel)]="producto.cantidadSalida" />
+						</ng-template>
+						<ng-template pTemplate="output"> {{ producto.cantidadSalida }}</ng-template>
+					</p-cellEditor>
+				</td>
 			}
 			@if (isProductoStock()) {
 				<td><p-tag [value]="producto.stock" [severity]="getStockSeverity(producto.stock)"> </p-tag></td>
 			}
+			<td>
+				<div>
+					@if (editing) {
+						<p-button
+							pRipple
+							type="button"
+							size="small"
+							pInitEditableRow
+							[text]="true"
+							icon="pi pi-check"
+							severity="success"
+							(click)="onRowEditSave(producto)"
+						></p-button>
+						<p-button
+							pRipple
+							type="button"
+							size="small"
+							pCancelEditableRow
+							[text]="true"
+							icon="pi pi-times"
+							severity="danger"
+							(click)="onRowEditCancel(producto, ri)"
+						></p-button>
+					} @else {
+						<p-button
+							pRipple
+							type="button"
+							size="small"
+							pInitEditableRow
+							[text]="true"
+							icon="pi pi-pencil"
+							(click)="onRowEditInit(producto)"
+						></p-button>
+					}
+				</div>
+			</td>
 		</tr>
 	</ng-template>
 </p-table>
