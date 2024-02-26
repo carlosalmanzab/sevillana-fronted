@@ -11,7 +11,6 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
 import { Table, TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
-import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-stock-table',
