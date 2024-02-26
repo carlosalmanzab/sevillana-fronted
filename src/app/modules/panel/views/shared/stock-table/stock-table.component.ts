@@ -1,18 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ProductoEntrada } from '@domain/productoEntrada.model';
-import { ProductoSalida } from '@domain/productoSalida.model';
-import { ProductoStock } from '@domain/productoStock.model';
+import { ArticuloEntrada, ArticuloSalida, ArticuloStock } from '@domain/articulo.model';
 import { StockService } from '@views/control-inventario/services/stock.service';
 import { ButtonModule } from 'primeng/button';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-import { InputNumber, InputNumberModule } from 'primeng/inputnumber';
+import { InputNumberModule } from 'primeng/inputnumber';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
 import { Table, TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-stock-table',
@@ -33,52 +32,42 @@ import { TagModule } from 'primeng/tag';
 	styleUrl: './stock-table.component.css'
 })
 export class StockTableComponent implements OnInit {
-	@ViewChildren(InputNumber) inputNumbers?: QueryList<InputNumber>;
 	// contenido de la tabla
-	productos: ProductoEntrada[] | ProductoSalida[] | ProductoStock[] = [];
+	articulos: ArticuloEntrada[] | ArticuloSalida[] | ArticuloStock[] = [];
 	// productos seleccionados
-	selectedProductos!: ProductoEntrada[] | ProductoSalida[] | ProductoStock[];
+	selectedArticulos!: ArticuloEntrada[] | ArticuloSalida[] | ArticuloStock[];
 	//clon de producto para edicion
-	clonedProductos: { [s: string]: ProductoEntrada | ProductoSalida | ProductoStock } = {};
+	clonedArticulo: { [s: string]: ArticuloEntrada | ArticuloSalida | ArticuloStock } = {};
 
 	constructor(private readonly stockService: StockService) {}
 
 	ngOnInit(): void {
-		this.productos = this.stockService.get();
+		this.getData();
 	}
 
-	setInputNumberWith() {
-		const inputElements = this.getInputNumberStyle();
-		inputElements.forEach((iE) => {
-			(iE as ElementRef).nativeElement().style.width = '100px';
+	getData(): void {
+		this.stockService.get().subscribe((data) => {
+			this.articulos = data;
 		});
 	}
 
-	getInputNumberStyle() {
-		const inputElements: unknown[] = [];
-		this.inputNumbers?.forEach((inputN) => {
-			const inputElement = (inputN.el as ElementRef).nativeElement.querySelector('p-inputnumber > span > input');
-			inputElements.push(inputElement);
-		});
-		return inputElements;
-	}
-	isProductoEntrada() {
-		if (this.productos.length > 0) {
-			return (this.productos[0] as ProductoEntrada).cantidadEntrada !== undefined;
+	isArticuloEntrada() {
+		if (this.articulos.length > 0) {
+			return (this.articulos[0] as ArticuloEntrada).cantidadEntrada !== undefined;
 		}
 		return false;
 	}
 
-	isProductoSalida() {
-		if (this.productos.length > 0) {
-			return (this.productos[0] as ProductoSalida).cantidadSalida !== undefined;
+	isArticuloSalida() {
+		if (this.articulos.length > 0) {
+			return (this.articulos[0] as ArticuloSalida).cantidadSalida !== undefined;
 		}
 		return false;
 	}
 
-	isProductoStock() {
-		if (this.productos.length > 0) {
-			return (this.productos[0] as ProductoStock).stock !== undefined;
+	isArticuloStock() {
+		if (this.articulos.length > 0) {
+			return (this.articulos[0] as ArticuloStock).stock !== undefined;
 		}
 		return false;
 	}
@@ -102,31 +91,30 @@ export class StockTableComponent implements OnInit {
 
 	globalFilterFieldsData(): string[] {
 		const field: string[] = ['codigo', 'articulo', 'fecha'];
-		if (this.isProductoEntrada() || this.isProductoStock()) {
+		if (this.isArticuloEntrada() || this.isArticuloStock()) {
 			field.push('entrada');
 		}
-		if (this.isProductoSalida() || this.isProductoStock()) {
+		if (this.isArticuloSalida() || this.isArticuloStock()) {
 			field.push('salida');
 		}
-		if (this.isProductoStock()) {
+		if (this.isArticuloStock()) {
 			field.push('stock');
 		}
 
 		return field;
 	}
-	onRowEditInit(producto: ProductoEntrada | ProductoSalida | ProductoStock) {
-		this.clonedProductos[producto.codigo as unknown as string] = { ...producto };
-		this.setInputNumberWith();
+	onRowEditInit(articulo: ArticuloEntrada | ArticuloSalida | ArticuloStock) {
+		this.clonedArticulo[articulo.codigo as unknown as string] = { ...articulo };
 	}
 
-	onRowEditSave(producto: ProductoEntrada | ProductoSalida | ProductoStock) {
+	onRowEditSave(articulo: ArticuloEntrada | ArticuloSalida | ArticuloStock) {
 		if (
-			this.validStock((producto as ProductoEntrada).cantidadEntrada) ||
-			this.validStock((producto as ProductoSalida).cantidadSalida) ||
-			(this.validStock((producto as ProductoStock).cantidadEntrada) &&
-				this.validStock((producto as ProductoStock).cantidadSalida))
+			this.validStock((articulo as ArticuloEntrada).cantidadEntrada) ||
+			this.validStock((articulo as ArticuloSalida).cantidadSalida) ||
+			(this.validStock((articulo as ArticuloStock).cantidadEntrada) &&
+				this.validStock((articulo as ArticuloStock).cantidadSalida))
 		) {
-			delete this.clonedProductos[producto.codigo as unknown as string];
+			delete this.clonedArticulo[articulo.codigo as unknown as string];
 		}
 	}
 
@@ -134,8 +122,8 @@ export class StockTableComponent implements OnInit {
 		return stock !== undefined && stock >= 0;
 	}
 
-	onRowEditCancel(producto: ProductoEntrada | ProductoSalida | ProductoStock, index: number) {
-		this.productos[index] = this.clonedProductos[producto.codigo as unknown as string];
-		delete this.clonedProductos[producto.codigo as unknown as string];
+	onRowEditCancel(articulo: ArticuloEntrada | ArticuloSalida | ArticuloStock, index: number) {
+		this.articulos[index] = this.clonedArticulo[articulo.codigo as unknown as string];
+		delete this.clonedArticulo[articulo.codigo as unknown as string];
 	}
 }

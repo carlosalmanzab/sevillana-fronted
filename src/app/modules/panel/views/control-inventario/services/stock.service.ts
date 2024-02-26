@@ -1,11 +1,18 @@
-import { Injectable } from '@angular/core';
-import { ProductoStock } from '../../../../../core/domain/productoStock.model';
+import { Injectable, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { ProductoArticuloStock, ProductoArticuloEntrada, ProductoArticuloSalida } from '@domain/productoArticulo.model';
+import { ToArticuloSalidaModelPipe } from '@shared/pipe/toArticuloSalidaModel.pipe';
+import { Observable, from, map, toArray } from 'rxjs';
+import { ToArticuloEntradaModelPipe } from '@shared/pipe/toArticuloEntradaModel.pipe';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class StockService {
-	private productosStock: ProductoStock[] = [];
+	private productosStock: ProductoArticuloStock[];
+
+	private router: Router = inject(Router);
+	stocks$: Observable<ProductoArticuloStock>;
 
 	constructor() {
 		this.productosStock = [
@@ -403,9 +410,29 @@ export class StockService {
 				stock: 76
 			}
 		];
+
+		this.stocks$ = from(this.productosStock);
 	}
 
-	get() {
-		return this.productosStock;
+	get(): Observable<ProductoArticuloEntrada[] | ProductoArticuloSalida[] | ProductoArticuloStock[]> {
+		if (this.router.url.includes('/salida')) {
+			return this.stocks$.pipe(
+				map((s) => {
+					return new ToArticuloSalidaModelPipe().transform(s) as ProductoArticuloSalida;
+				}),
+				toArray()
+			);
+		}
+
+		if (this.router.url.includes('/entrada')) {
+			return this.stocks$.pipe(
+				map((s) => {
+					return new ToArticuloEntradaModelPipe().transform(s) as ProductoArticuloEntrada;
+				}),
+				toArray()
+			);
+		}
+
+		return this.stocks$.pipe(toArray());
 	}
 }

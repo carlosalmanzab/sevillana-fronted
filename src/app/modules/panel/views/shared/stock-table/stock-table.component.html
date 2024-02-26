@@ -1,7 +1,7 @@
 <p-table
 	#dtstock
-	[value]="productos"
-	[(selection)]="selectedProductos"
+	[value]="articulos"
+	[(selection)]="selectedArticulos"
 	dataKey="codigo"
 	[tableStyle]="{ 'min-width': '50rem' }"
 	[paginator]="true"
@@ -50,21 +50,21 @@
 					Fecha<p-sortIcon field="fecha" /><p-columnFilter type="date" field="fecha" display="menu" />
 				</div>
 			</th>
-			@if (isProductoEntrada() || isProductoStock()) {
+			@if (isArticuloEntrada() || isArticuloStock()) {
 				<th pSortableColumn="entrada">
 					<div class="flex justify-content-start align-items-center">
 						Entrada<p-sortIcon field="entrada" /><p-columnFilter type="numeric" field="entrada" display="menu" />
 					</div>
 				</th>
 			}
-			@if (isProductoSalida() || isProductoStock()) {
+			@if (isArticuloSalida() || isArticuloStock()) {
 				<th pSortableColumn="salida">
 					<div class="flex justify-content-start align-items-center">
 						Salida<p-sortIcon field="salida" /><p-columnFilter type="numeric" field="salida" display="menu" />
 					</div>
 				</th>
 			}
-			@if (isProductoStock()) {
+			@if (isArticuloStock()) {
 				<th pSortableColumn="stock">
 					<div class="flex justify-content-start align-items-center">
 						Stock<p-sortIcon field="stock" /><p-columnFilter type="numeric" field="stock" display="menu" />
@@ -74,43 +74,43 @@
 			<th><i class="pi pi-file-edit"></i></th>
 		</tr>
 	</ng-template>
-	<ng-template pTemplate="body" let-producto let-editing="editing" let-ri="rowIndex">
-		<tr [pEditableRow]="producto">
+	<ng-template pTemplate="body" let-articulo let-editing="editing" let-ri="rowIndex">
+		<tr [pEditableRow]="articulo">
 			<td>
-				<p-tableCheckbox [value]="producto"></p-tableCheckbox>
+				<p-tableCheckbox [value]="articulo"></p-tableCheckbox>
 			</td>
-			<td>{{ producto.codigo }}</td>
+			<td>{{ articulo.codigo }}</td>
 			<td>
 				<p-cellEditor
 					><ng-template pTemplate="input"
-						><input class="custom-width-text" pInputText type="text" [(ngModel)]="producto.articulo" required />
+						><input class="custom-width-text" pInputText type="text" [(ngModel)]="articulo.articulo" required />
 					</ng-template>
-					<ng-template pTemplate="output"> {{ producto.articulo }}</ng-template>
+					<ng-template pTemplate="output"> {{ articulo.articulo }}</ng-template>
 				</p-cellEditor>
 			</td>
-			<td>{{ producto.fecha | date: 'd/MM/yy, h a' }}</td>
-			@if (isProductoEntrada()) {
+			<td>{{ articulo.fecha | date: 'd/MM/yy, h a' }}</td>
+			@if (isArticuloEntrada()) {
 				<td class="field-number">
 					<p-cellEditor
 						><ng-template pTemplate="input"
-							><p-inputNumber inputStyleClass="custom-width-number" [(ngModel)]="producto.cantidadEntrada" />
+							><p-inputNumber inputStyleClass="custom-width-number" [(ngModel)]="articulo.cantidadEntrada" />
 						</ng-template>
-						<ng-template pTemplate="output"> {{ producto.cantidadEntrada }}</ng-template>
+						<ng-template pTemplate="output"> {{ articulo.cantidadEntrada }}</ng-template>
 					</p-cellEditor>
 				</td>
 			}
-			@if (isProductoSalida()) {
+			@if (isArticuloSalida()) {
 				<td>
 					<p-cellEditor
 						><ng-template pTemplate="input"
-							><p-inputNumber inputStyleClass="custom-width-number" [(ngModel)]="producto.cantidadSalida" />
+							><p-inputNumber inputStyleClass="custom-width-number" [(ngModel)]="articulo.cantidadSalida" />
 						</ng-template>
-						<ng-template pTemplate="output"> {{ producto.cantidadSalida }}</ng-template>
+						<ng-template pTemplate="output"> {{ articulo.cantidadSalida }}</ng-template>
 					</p-cellEditor>
 				</td>
 			}
-			@if (isProductoStock()) {
-				<td><p-tag [value]="producto.stock" [severity]="getStockSeverity(producto.stock)"> </p-tag></td>
+			@if (isArticuloStock()) {
+				<td><p-tag [value]="articulo.stock" [severity]="getStockSeverity(articulo.stock)"> </p-tag></td>
 			}
 			<td>
 				<div>
@@ -123,7 +123,7 @@
 							[text]="true"
 							icon="pi pi-check"
 							severity="success"
-							(click)="onRowEditSave(producto)"
+							(click)="onRowEditSave(articulo)"
 						></p-button>
 						<p-button
 							pRipple
@@ -133,7 +133,7 @@
 							[text]="true"
 							icon="pi pi-times"
 							severity="danger"
-							(click)="onRowEditCancel(producto, ri)"
+							(click)="onRowEditCancel(articulo, ri)"
 						></p-button>
 					} @else {
 						<p-button
@@ -143,7 +143,7 @@
 							pInitEditableRow
 							[text]="true"
 							icon="pi pi-pencil"
-							(click)="onRowEditInit(producto)"
+							(click)="onRowEditInit(articulo)"
 						></p-button>
 					}
 				</div>
