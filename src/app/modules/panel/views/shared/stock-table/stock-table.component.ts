@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ArticuloEntrada, ArticuloSalida, ArticuloStock } from '@domain/articulo.model';
-import { StockService } from '@views/control-inventario/services/stock.service';
 import { ButtonModule } from 'primeng/button';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
@@ -11,6 +9,13 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
 import { Table, TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
+import { takeUntil } from 'rxjs';
+
+import { ArticuloEntrada, ArticuloSalida, ArticuloStock } from '@domain/articulo.model';
+import { StockService } from '@views/control-inventario/services/stock.service';
+import { MenuActionTableComponent } from '@views/shared/menu-action-table/menu-action-table.component';
+import { Unsubscribe } from '@core/subs-handler/unsubscribe';
+import { MenuActionTableService } from '@views/shared/menu-action-table/service/menu-action-table.service';
 
 @Component({
 	selector: 'app-stock-table',
@@ -25,12 +30,14 @@ import { TagModule } from 'primeng/tag';
 		InputGroupModule,
 		InputNumberModule,
 		InputSwitchModule,
-		InputGroupAddonModule
+		InputGroupAddonModule,
+		MenuActionTableComponent
 	],
 	templateUrl: './stock-table.component.html',
 	styleUrl: './stock-table.component.css'
 })
-export class StockTableComponent implements OnInit {
+export class StockTableComponent extends Unsubscribe implements OnInit {
+	private menuATService = inject(MenuActionTableService);
 	// contenido de la tabla
 	articulos: ArticuloEntrada[] | ArticuloSalida[] | ArticuloStock[] = [];
 	// productos seleccionados
@@ -38,16 +45,21 @@ export class StockTableComponent implements OnInit {
 	//clon de producto para edicion
 	clonedArticulo: { [s: string]: ArticuloEntrada | ArticuloSalida | ArticuloStock } = {};
 
-	constructor(private readonly stockService: StockService) {}
+	constructor(private readonly stockService: StockService) {
+		super();
+	}
 
 	ngOnInit(): void {
 		this.getData();
 	}
 
 	getData(): void {
-		this.stockService.get().subscribe((data) => {
-			this.articulos = data;
-		});
+		this.stockService
+			.get()
+			.pipe(takeUntil(this.unsubscribe$))
+			.subscribe((data) => {
+				this.articulos = data;
+			});
 	}
 
 	isArticuloEntrada() {
@@ -102,6 +114,7 @@ export class StockTableComponent implements OnInit {
 
 		return field;
 	}
+
 	onRowEditInit(articulo: ArticuloEntrada | ArticuloSalida | ArticuloStock) {
 		this.clonedArticulo[articulo.codigo as unknown as string] = { ...articulo };
 	}
