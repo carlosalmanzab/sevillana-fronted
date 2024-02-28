@@ -38,14 +38,14 @@ export class MenuActionTableComponent extends Unsubscribe implements OnInit {
 	}
 
 	editingEmit() {
-		this.menuATService.editingClickEmit;
+		this.menuATService.editingActiveEmitter();
 	}
 
 	deletingEmit() {
-		this.menuATService.deletingClickEmit;
+		this.menuATService.deletingActiveEmitter();
 	}
 
 	addingEmit() {
-		this.menuATService.addingClickEmit;
+		this.menuATService.addingActiveEmitter();
 	}
 }

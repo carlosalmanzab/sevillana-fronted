@@ -114,42 +114,42 @@ export class MenuActionTableService {
 	/**
 	 * Emits an event through the editingClickEventEmitter to signal a change in editing mode.
 	 */
-	editingClickEmit() {
+	editingActiveEmitter() {
 		this.editingClickEventEmitter.emit();
 	}
 
 	/**
 	 * Public getter for an EventEmitter used to listen for editing mode changes.
 	 */
-	get editingEventListener(): EventEmitter<void> {
-		return this.editingClickEventEmitter;
+	get editingEventListener(): Observable<void> {
+		return this.editingClickEventEmitter.asObservable();
 	}
 
 	/**
 	 * Emits an event through the deletingClickEventEmitter to signal a change in deleting mode.
 	 */
-	deletingClickEmit() {
+	deletingActiveEmitter() {
 		this.deletingClickEventEmmiter.emit();
 	}
 
 	/**
 	 * Public getter for an EventEmitter used to listen for deleting mode changes.
 	 */
-	get deletingEventListener(): EventEmitter<void> {
-		return this.deletingClickEventEmmiter;
+	get deletingEventListener(): Observable<void> {
+		return this.deletingClickEventEmmiter.asObservable();
 	}
 
 	/**
 	 * Emits an event through the addingClickEventEmitter to signal a change in adding mode.
 	 */
-	addingClickEmit() {
+	addingActiveEmitter() {
 		this.addingClickEventEmmiter.emit();
 	}
 
 	/**
 	 * Public getter for an EventEmitter used to listen for adding mode changes.
 	 */
-	get addingEventListener(): EventEmitter<void> {
-		return this.addingClickEventEmmiter;
+	get addingEventListener(): Observable<void> {
+		return this.addingClickEventEmmiter.asObservable();
 	}
 }

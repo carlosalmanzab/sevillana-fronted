@@ -11,10 +11,10 @@ import { Table, TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { takeUntil } from 'rxjs';
 
+import { Unsubscribe } from '@core/subs-handler/unsubscribe';
 import { ArticuloEntrada, ArticuloSalida, ArticuloStock } from '@domain/articulo.model';
 import { StockService } from '@views/control-inventario/services/stock.service';
 import { MenuActionTableComponent } from '@views/shared/menu-action-table/menu-action-table.component';
-import { Unsubscribe } from '@core/subs-handler/unsubscribe';
 import { MenuActionTableService } from '@views/shared/menu-action-table/service/menu-action-table.service';
 
 @Component({
@@ -45,12 +45,15 @@ export class StockTableComponent extends Unsubscribe implements OnInit {
 	//clon de producto para edicion
 	clonedArticulo: { [s: string]: ArticuloEntrada | ArticuloSalida | ArticuloStock } = {};
 
+	isEditMode: boolean = false;
+
 	constructor(private readonly stockService: StockService) {
 		super();
 	}
 
 	ngOnInit(): void {
 		this.getData();
+		this.editAction();
 	}
 
 	getData(): void {
@@ -85,8 +88,8 @@ export class StockTableComponent extends Unsubscribe implements OnInit {
 
 	getStockSeverity(stock: number) {
 		if (stock > 0) return 'success';
-		if (stock == 0) return 'info';
-		if (stock < 0) return 'negotiation';
+		if (stock == 0) return 'warning';
+		if (stock < 0) return 'danger';
 		return undefined;
 	}
 
@@ -137,5 +140,16 @@ export class StockTableComponent extends Unsubscribe implements OnInit {
 	onRowEditCancel(articulo: ArticuloEntrada | ArticuloSalida | ArticuloStock, index: number) {
 		this.articulos[index] = this.clonedArticulo[articulo.codigo as unknown as string];
 		delete this.clonedArticulo[articulo.codigo as unknown as string];
+	}
+
+	editAction() {
+		this.menuATService.editingEventListener.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
+			this.menuATService.setEditing(!this.isEditMode);
+			this.isEditMode = !this.isEditMode;
+		});
+	}
+
+	addAction() {
+		this.menuATService.addingEventListener.pipe(takeUntil(this.unsubscribe$)).subscribe();
 	}
 }

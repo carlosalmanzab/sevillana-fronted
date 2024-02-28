@@ -76,7 +76,9 @@
 					</div>
 				</th>
 			}
-			<th><i class="pi pi-file-edit"></i></th>
+			@if (isEditMode) {
+				<th><i class="pi pi-file-edit"></i></th>
+			}
 		</tr>
 	</ng-template>
 	<ng-template pTemplate="body" let-articulo let-editing="editing" let-ri="rowIndex">
@@ -117,42 +119,44 @@
 			@if (isArticuloStock()) {
 				<td><p-tag [value]="articulo.stock" [severity]="getStockSeverity(articulo.stock)"> </p-tag></td>
 			}
-			<td>
-				<div>
-					@if (editing) {
-						<p-button
-							pRipple
-							type="button"
-							size="small"
-							pInitEditableRow
-							[text]="true"
-							icon="pi pi-check"
-							severity="success"
-							(click)="onRowEditSave(articulo)"
-						></p-button>
-						<p-button
-							pRipple
-							type="button"
-							size="small"
-							pCancelEditableRow
-							[text]="true"
-							icon="pi pi-times"
-							severity="danger"
-							(click)="onRowEditCancel(articulo, ri)"
-						></p-button>
-					} @else {
-						<p-button
-							pRipple
-							type="button"
-							size="small"
-							pInitEditableRow
-							[text]="true"
-							icon="pi pi-pencil"
-							(click)="onRowEditInit(articulo)"
-						></p-button>
-					}
-				</div>
-			</td>
+			@if (isEditMode) {
+				<td>
+					<div>
+						@if (editing) {
+							<p-button
+								pRipple
+								type="button"
+								size="small"
+								pInitEditableRow
+								[text]="true"
+								icon="pi pi-check"
+								severity="success"
+								(click)="onRowEditSave(articulo)"
+							></p-button>
+							<p-button
+								pRipple
+								type="button"
+								size="small"
+								pCancelEditableRow
+								[text]="true"
+								icon="pi pi-times"
+								severity="danger"
+								(click)="onRowEditCancel(articulo, ri)"
+							></p-button>
+						} @else {
+							<p-button
+								pRipple
+								type="button"
+								size="small"
+								pInitEditableRow
+								[text]="true"
+								icon="pi pi-pencil"
+								(click)="onRowEditInit(articulo)"
+							></p-button>
+						}
+					</div>
+				</td>
+			}
 		</tr>
 	</ng-template>
 </p-table>
