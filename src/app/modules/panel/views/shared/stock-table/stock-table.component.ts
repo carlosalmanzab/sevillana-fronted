@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DoCheck, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputGroupModule } from 'primeng/inputgroup';
@@ -9,7 +9,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
 import { Table, TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
-import { takeUntil } from 'rxjs';
+import { BehaviorSubject, takeUntil } from 'rxjs';
 
 import { Unsubscribe } from '@core/subs-handler/unsubscribe';
 import { ArticuloEntrada, ArticuloSalida, ArticuloStock } from '@domain/articulo.model';
@@ -36,24 +36,31 @@ import { MenuActionTableService } from '@views/shared/menu-action-table/service/
 	templateUrl: './stock-table.component.html',
 	styleUrl: './stock-table.component.css'
 })
-export class StockTableComponent extends Unsubscribe implements OnInit {
+export class StockTableComponent extends Unsubscribe implements OnInit, DoCheck {
 	private menuATService = inject(MenuActionTableService);
 	// contenido de la tabla
 	articulos: ArticuloEntrada[] | ArticuloSalida[] | ArticuloStock[] = [];
 	// productos seleccionados
-	selectedArticulos!: ArticuloEntrada[] | ArticuloSalida[] | ArticuloStock[];
+	selectedArticulos: ArticuloEntrada[] | ArticuloSalida[] | ArticuloStock[];
 	//clon de producto para edicion
 	clonedArticulo: { [s: string]: ArticuloEntrada | ArticuloSalida | ArticuloStock } = {};
 
 	isEditMode: boolean = false;
 
+	private selectedArticulosSubject$ = new BehaviorSubject<ArticuloEntrada[] | ArticuloSalida[] | ArticuloStock[]>([]);
+
 	constructor(private readonly stockService: StockService) {
 		super();
+		this.selectedArticulos = [];
+	}
+	ngDoCheck(): void {
+		this.checkSelectedArticulosArray();
 	}
 
 	ngOnInit(): void {
 		this.getData();
 		this.editAction();
+		this.deleteAction();
 	}
 
 	getData(): void {
@@ -143,13 +150,32 @@ export class StockTableComponent extends Unsubscribe implements OnInit {
 	}
 
 	editAction() {
+		//TODO: Add http method logic
 		this.menuATService.editingEventListener.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
 			this.menuATService.setEditing(!this.isEditMode);
 			this.isEditMode = !this.isEditMode;
 		});
 	}
 
+	checkSelectedArticulosArray() {
+		const selectedArticulos = this.selectedArticulos || [];
+		if (selectedArticulos.some((articulo) => articulo)) {
+			this.selectedArticulosSubject$.next(selectedArticulos);
+			this.deleteAction();
+		} else {
+			this.menuATService.setDeleting(false);
+		}
+	}
+
+	deleteAction() {
+		//TODO: Add http method logic
+		this.selectedArticulosSubject$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
+			this.menuATService.setDeleting(true);
+		});
+	}
+
 	addAction() {
+		//TODO: Add http method logic
 		this.menuATService.addingEventListener.pipe(takeUntil(this.unsubscribe$)).subscribe();
 	}
 }
