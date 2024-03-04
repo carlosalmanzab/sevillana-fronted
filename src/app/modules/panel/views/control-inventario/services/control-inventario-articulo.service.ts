@@ -1,14 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProductoArticuloStock, ProductoArticuloEntrada, ProductoArticuloSalida } from '@domain/productoArticulo.model';
-import { ToArticuloSalidaModelPipe } from '@shared/pipe/toArticuloSalidaModel.pipe';
-import { Observable, from, map, toArray } from 'rxjs';
+import { ProductoArticuloEntrada, ProductoArticuloSalida, ProductoArticuloStock } from '@domain/productoArticulo.model';
 import { ToArticuloEntradaModelPipe } from '@shared/pipe/toArticuloEntradaModel.pipe';
+import { ToArticuloSalidaModelPipe } from '@shared/pipe/toArticuloSalidaModel.pipe';
+import { IArticuloService } from '@shared/services/iArticuloService.service';
+import { Observable, from, map, toArray } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
 })
-export class StockService {
+export class ControlInventarioArticuloService implements IArticuloService {
 	private productosStock: ProductoArticuloStock[];
 
 	private router: Router = inject(Router);
@@ -414,7 +415,7 @@ export class StockService {
 		this.stocks$ = from(this.productosStock);
 	}
 
-	get(): Observable<ProductoArticuloEntrada[] | ProductoArticuloSalida[] | ProductoArticuloStock[]> {
+	getAll(): Observable<ProductoArticuloEntrada[] | ProductoArticuloSalida[] | ProductoArticuloStock[]> {
 		if (this.router.url.includes('/salida')) {
 			return this.stocks$.pipe(
 				map((s) => {

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, DoCheck, OnInit, inject } from '@angular/core';
+import { Component, DoCheck, Inject, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { IArticuloService } from '@shared/services/iArticuloService.service';
 import { ButtonModule } from 'primeng/button';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
@@ -13,9 +14,9 @@ import { BehaviorSubject, takeUntil } from 'rxjs';
 
 import { Unsubscribe } from '@core/subs-handler/unsubscribe';
 import { ArticuloEntrada, ArticuloSalida, ArticuloStock } from '@domain/articulo.model';
-import { StockService } from '@views/control-inventario/services/stock.service';
 import { MenuActionTableComponent } from '@views/shared/menu-action-table/menu-action-table.component';
 import { MenuActionTableService } from '@views/shared/menu-action-table/service/menu-action-table.service';
+import { I_ARTICULO_SERVICE_TOKEN } from '@tokens';
 
 @Component({
 	selector: 'app-stock-table',
@@ -49,7 +50,7 @@ export class StockTableComponent extends Unsubscribe implements OnInit, DoCheck 
 
 	private selectedArticulosSubject$ = new BehaviorSubject<ArticuloEntrada[] | ArticuloSalida[] | ArticuloStock[]>([]);
 
-	constructor(private readonly stockService: StockService) {
+	constructor(@Inject(I_ARTICULO_SERVICE_TOKEN) private articuloService: IArticuloService) {
 		super();
 		this.selectedArticulos = [];
 	}
@@ -64,8 +65,8 @@ export class StockTableComponent extends Unsubscribe implements OnInit, DoCheck 
 	}
 
 	getData(): void {
-		this.stockService
-			.get()
+		this.articuloService
+			.getAll()
 			.pipe(takeUntil(this.unsubscribe$))
 			.subscribe((data) => {
 				this.articulos = data;

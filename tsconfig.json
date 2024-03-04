@@ -13,7 +13,8 @@
       "@views/*": ["src/app/modules/panel/views/*"],
       "@environments/*": ["src/environments/*"],
       "@constants": ["src/app/global/constants"],
-      "@endpoints": ["src/app/global/endpoints"]
+      "@endpoints": ["src/app/global/endpoints"],
+      "@tokens": ["src/app/core/tokens"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
