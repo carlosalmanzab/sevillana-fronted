@@ -122,7 +122,6 @@ export class StockTableComponent extends Unsubscribe implements OnInit, DoCheck 
 		if (this.isArticuloStock()) {
 			field.push('stock');
 		}
-
 		return field;
 	}
 
