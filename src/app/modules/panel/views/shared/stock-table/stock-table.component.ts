@@ -14,9 +14,9 @@ import { BehaviorSubject, takeUntil } from 'rxjs';
 
 import { Unsubscribe } from '@core/subs-handler/unsubscribe';
 import { ArticuloEntrada, ArticuloSalida, ArticuloStock } from '@domain/articulo.model';
+import { I_ARTICULO_SERVICE_TOKEN } from '@tokens';
 import { MenuActionTableComponent } from '@views/shared/menu-action-table/menu-action-table.component';
 import { MenuActionTableService } from '@views/shared/menu-action-table/service/menu-action-table.service';
-import { I_ARTICULO_SERVICE_TOKEN } from '@tokens';
 
 @Component({
 	selector: 'app-stock-table',
@@ -47,6 +47,7 @@ export class StockTableComponent extends Unsubscribe implements OnInit, DoCheck 
 	clonedArticulo: { [s: string]: ArticuloEntrada | ArticuloSalida | ArticuloStock } = {};
 
 	isEditMode: boolean = false;
+	isEditing: boolean = false;
 
 	private selectedArticulosSubject$ = new BehaviorSubject<ArticuloEntrada[] | ArticuloSalida[] | ArticuloStock[]>([]);
 
@@ -126,6 +127,7 @@ export class StockTableComponent extends Unsubscribe implements OnInit, DoCheck 
 	}
 
 	onRowEditInit(articulo: ArticuloEntrada | ArticuloSalida | ArticuloStock) {
+		this.isEditing = true;
 		this.clonedArticulo[articulo.codigo as unknown as string] = { ...articulo };
 	}
 
@@ -145,6 +147,7 @@ export class StockTableComponent extends Unsubscribe implements OnInit, DoCheck 
 	}
 
 	onRowEditCancel(articulo: ArticuloEntrada | ArticuloSalida | ArticuloStock, index: number) {
+		this.isEditing = false;
 		this.articulos[index] = this.clonedArticulo[articulo.codigo as unknown as string];
 		delete this.clonedArticulo[articulo.codigo as unknown as string];
 	}
@@ -152,8 +155,13 @@ export class StockTableComponent extends Unsubscribe implements OnInit, DoCheck 
 	editAction() {
 		//TODO: Add http method logic
 		this.menuATService.editingEventListener.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
-			this.menuATService.setEditing(!this.isEditMode);
-			this.isEditMode = !this.isEditMode;
+			if (this.isEditing) {
+				//TODO:add toast service
+				console.log('termina de editar');
+			} else {
+				this.menuATService.setEditing(!this.isEditMode);
+				this.isEditMode = !this.isEditMode;
+			}
 		});
 	}
 
