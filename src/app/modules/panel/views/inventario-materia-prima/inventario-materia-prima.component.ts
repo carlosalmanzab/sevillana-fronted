@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
 	standalone: true,
 	imports: [],
 	templateUrl: './inventario-materia-prima.component.html',
-	styleUrl: './inventario-materia-prima.component.css'
+	styleUrl: './inventario-materia-prima.component.scss'
 })
 export default class InventarioMateriaPrimaComponent {}

@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
 	standalone: true,
 	imports: [],
 	templateUrl: './cuentas-por-cobrar.component.html',
-	styleUrl: './cuentas-por-cobrar.component.css'
+	styleUrl: './cuentas-por-cobrar.component.scss'
 })
 export default class CuentasPorCobrarComponent {}
