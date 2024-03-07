@@ -12,7 +12,7 @@ import { img_paths } from '@constants';
 	standalone: true,
 	imports: [StyleClassModule, CheckboxModule, InputTextModule, ButtonModule, RippleModule, ImageModule],
 	templateUrl: './login.component.html',
-	styleUrl: './login.component.css'
+	styleUrl: './login.component.scss'
 })
 export default class LoginComponent {
 	imgBackground = img_paths.backgroundLogin;

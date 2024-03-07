@@ -3,6 +3,7 @@ import { HomeComponent } from '@modules/panel/home/home.component';
 
 export const routes: Routes = [
 	{
+		//TODO: Corregir ruta '' doble uso, y pasar las rutas de auth a un archivo de rutas
 		path: '',
 		children: [
 			{

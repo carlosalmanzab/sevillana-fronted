@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
 	standalone: true,
 	imports: [],
 	templateUrl: './empleados.component.html',
-	styleUrl: './empleados.component.css'
+	styleUrl: './empleados.component.scss'
 })
 export default class EmpleadosComponent {}

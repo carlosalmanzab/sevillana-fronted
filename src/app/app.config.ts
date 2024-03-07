@@ -6,4 +6,5 @@ import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
 	providers: [provideRouter(routes), provideAnimations()]
+	//TODO: agregar a provider el httpclient con los intercetpores
 };

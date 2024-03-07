@@ -10,7 +10,7 @@ import { NgClass } from '@angular/common';
 	standalone: true,
 	imports: [ButtonModule, NgClass],
 	templateUrl: './menu-action-table.component.html',
-	styleUrl: './menu-action-table.component.css'
+	styleUrl: './menu-action-table.component.scss'
 })
 export class MenuActionTableComponent extends Unsubscribe implements OnInit {
 	isEditing!: boolean;

@@ -1,18 +1,8 @@
-<div class="flex my-2" height="h-screen">
-	<div class="w-2 pr-2">
-		<app-header />
+<div class="flex surface-card p-1 h-screen">
+	<div class="w-2">
 		<app-side-bar />
 	</div>
-
-	<div class="w-10">
-		<div class="flex">
-			<div class="w-12 pr-2 m-0">
-				<app-breadcrumb />
-			</div>
-		</div>
-
-		<div class="p-2 mt-1 mb-1 surface-0 surface-card border-round surface-border border-1" width="w-full">
-			<router-outlet></router-outlet>
-		</div>
+	<div class="surface-card min-h-full w-10 custom-rounded p-2">
+		<router-outlet></router-outlet>
 	</div>
 </div>

@@ -6,7 +6,7 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 	standalone: true,
 	imports: [BreadcrumbModule],
 	templateUrl: './breadcrumb.component.html',
-	styleUrl: './breadcrumb.component.css'
+	styleUrl: './breadcrumb.component.scss'
 })
 export class BreadcrumbComponent {
 	items = [{ label: 'Home' }, { label: 'Products' }, { label: 'Product A' }];

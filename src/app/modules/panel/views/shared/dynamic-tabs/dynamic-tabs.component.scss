@@ -1,0 +1,12 @@
+:host ::ng-deep {
+	.custom-tab.p-tabmenu {
+		.p-tabmenu-nav {
+			border: none;
+			.p-tabmenuitem {
+				.p-menuitem-link {
+					border: none;
+				}
+			}
+		}
+	}
+}

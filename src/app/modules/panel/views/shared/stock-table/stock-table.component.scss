@@ -1,0 +1,22 @@
+:host {
+	display: block;
+}
+
+:host ::ng-deep {
+	.custom-table.p-datatable {
+		margin: 6px;
+		.p-datatable-header,
+		.p-datatable-thead > tr > th,
+		.p-datatable-tbody > tr > td,
+		.p-paginator-bottom {
+			border: 0px;
+		}
+	}
+	.p-checkbox .p-checkbox-box {
+		border-radius: 15px;
+	}
+}
+
+.i-number {
+	width: 100px;
+}

@@ -35,7 +35,7 @@ import { MenuActionTableService } from '@views/shared/menu-action-table/service/
 		MenuActionTableComponent
 	],
 	templateUrl: './stock-table.component.html',
-	styleUrl: './stock-table.component.css'
+	styleUrl: './stock-table.component.scss'
 })
 export class StockTableComponent extends Unsubscribe implements OnInit, DoCheck {
 	private menuATService = inject(MenuActionTableService);
