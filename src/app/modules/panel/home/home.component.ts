@@ -10,7 +10,7 @@ import { PrimeNGConfig } from 'primeng/api';
 	selector: 'app-home',
 	standalone: true,
 	imports: [HeaderComponent, SideBarComponent, RouterOutlet, BreadcrumbComponent, MenuActionTableComponent],
-	styleUrl: './home.component.css',
+	styleUrl: './home.component.scss',
 	templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {

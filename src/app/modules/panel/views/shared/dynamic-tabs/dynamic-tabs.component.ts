@@ -8,7 +8,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
 	standalone: true,
 	imports: [TabMenuModule, RouterOutlet],
 	templateUrl: './dynamic-tabs.component.html',
-	styleUrl: './dynamic-tabs.component.css'
+	styleUrl: './dynamic-tabs.component.scss'
 })
 export class DynamicTabsComponent implements OnInit {
 	@Input() items: MenuItem[] | undefined;

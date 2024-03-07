@@ -29,7 +29,7 @@ import { DividerModule } from 'primeng/divider';
 		DividerModule
 	],
 	templateUrl: './register.component.html',
-	styleUrl: './register.component.css'
+	styleUrl: './register.component.scss'
 })
 export default class RegisterComponent {
 	imgBackground = img_paths.backgroundRegister;

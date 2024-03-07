@@ -1,9 +1,9 @@
 <p-table
 	#dtstock
 	[value]="articulos"
+	selectionMode="single"
 	[(selection)]="selectedArticulos"
 	dataKey="codigo"
-	[tableStyle]="{ 'min-width': '50rem' }"
 	[paginator]="true"
 	[rows]="10"
 	[showCurrentPageReport]="true"
@@ -12,7 +12,7 @@
 	[scrollable]="true"
 	scrollHeight="500px"
 	[resizableColumns]="true"
-	styleClass="p-datatable-sm"
+	styleClass="p-datatable-sm custom-table"
 	[filterDelay]="0"
 	[globalFilterFields]="globalFilterFieldsData()"
 	editMode="row"
@@ -42,9 +42,13 @@
 	<ng-template pTemplate="header">
 		<tr>
 			<th>
-				<p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+				<div>
+					<p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+				</div>
 			</th>
-			<th pSortableColumn="codigo"><i class="pi pi-hashtag"></i><p-sortIcon field="codigo"></p-sortIcon></th>
+			<th pSortableColumn="codigo">
+				<div><i class="pi pi-hashtag m-2"></i><p-sortIcon field="codigo"></p-sortIcon></div>
+			</th>
 			<th pSortableColumn="articulo">
 				<div class="flex justify-content-start align-items-center">
 					Articulo<p-sortIcon field="articulo" /><p-columnFilter type="text" field="articulo" display="menu" />
@@ -77,7 +81,11 @@
 				</th>
 			}
 			@if (isEditMode) {
-				<th><i class="pi pi-file-edit"></i></th>
+				<th>
+					<div class="flex align-items-center flex-wrap justify-content-center">
+						<i class="pi pi-file-edit m-2"></i>
+					</div>
+				</th>
 			}
 		</tr>
 	</ng-template>
@@ -102,7 +110,9 @@
 						><ng-template pTemplate="input"
 							><p-inputNumber inputStyleClass="custom-width-number" [(ngModel)]="articulo.cantidadEntrada" />
 						</ng-template>
-						<ng-template pTemplate="output"> {{ articulo.cantidadEntrada }}</ng-template>
+						<ng-template pTemplate="output">
+							<span class="text-green-500 font-medium">{{ articulo.cantidadEntrada }}</span></ng-template
+						><!-- TODO://condicionar el color  -->
 					</p-cellEditor>
 				</td>
 			}
@@ -112,12 +122,16 @@
 						><ng-template pTemplate="input"
 							><p-inputNumber inputStyleClass="custom-width-number" [(ngModel)]="articulo.cantidadSalida" />
 						</ng-template>
-						<ng-template pTemplate="output"> {{ articulo.cantidadSalida }}</ng-template>
+						<ng-template pTemplate="output"
+							><span class="text-red-500 font-medium"> {{ articulo.cantidadSalida }}</span></ng-template
+						>
 					</p-cellEditor>
 				</td>
 			}
 			@if (isArticuloStock()) {
-				<td><p-tag [value]="articulo.stock" [severity]="getStockSeverity(articulo.stock)"> </p-tag></td>
+				<td>
+					<p-tag [value]="articulo.stock" [rounded]="true" [severity]="getStockSeverity(articulo.stock)"> </p-tag>
+				</td>
 			}
 			@if (isEditMode) {
 				<td>

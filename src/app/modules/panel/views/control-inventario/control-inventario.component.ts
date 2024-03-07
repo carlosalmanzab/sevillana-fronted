@@ -13,7 +13,7 @@ import { ControlInventarioArticuloService } from './services/control-inventario-
 	selector: 'app-control-inventario',
 	standalone: true,
 	templateUrl: './control-inventario.component.html',
-	styleUrl: './control-inventario.component.css',
+	styleUrl: './control-inventario.component.scss',
 	imports: [StockTableComponent, MenuActionTableComponent, DynamicTabsComponent, RouterOutlet, RouterLink],
 	providers: [{ provide: I_ARTICULO_SERVICE_TOKEN, useClass: ControlInventarioArticuloService }]
 })

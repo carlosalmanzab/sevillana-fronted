@@ -7,6 +7,6 @@ import { MenubarModule } from 'primeng/menubar';
 	standalone: true,
 	imports: [ButtonModule, MenubarModule],
 	templateUrl: './header.component.html',
-	styleUrl: './header.component.css'
+	styleUrl: './header.component.scss'
 })
 export class HeaderComponent {}

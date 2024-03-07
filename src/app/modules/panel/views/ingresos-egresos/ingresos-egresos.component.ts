@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
 	standalone: true,
 	imports: [],
 	templateUrl: './ingresos-egresos.component.html',
-	styleUrl: './ingresos-egresos.component.css'
+	styleUrl: './ingresos-egresos.component.scss'
 })
 export default class IngresosEgresosComponent {}
