@@ -1,24 +1,24 @@
 import { Routes } from '@angular/router';
 import { client } from '@endpoints';
 
-const control_invetiarioPath = client.routes.home.control_inventario;
+const inventario_materiaPath = client.routes.home.inventario_materia_prima;
 
-export const CONTROL_INVETARIO_ROUTES: Routes = [
+export const INVETARIO_MATERIA_PRIMA_ROUTES: Routes = [
 	{
-		path: control_invetiarioPath.stock.path,
+		path: inventario_materiaPath.stock.path,
 		loadComponent: () => import('@modules/panel/views/shared/stock-table/stock-table.component')
 	},
 	{
-		path: control_invetiarioPath.entrada.path,
+		path: inventario_materiaPath.entrada.path,
 		loadComponent: () => import('@modules/panel/views/shared/stock-table/stock-table.component')
 	},
 	{
-		path: control_invetiarioPath.salida.path,
+		path: inventario_materiaPath.salida.path,
 		loadComponent: () => import('@modules/panel/views/shared/stock-table/stock-table.component')
 	},
 	{
 		path: '',
 		pathMatch: 'full',
-		redirectTo: control_invetiarioPath.stock.path
+		redirectTo: inventario_materiaPath.stock.path
 	}
 ];

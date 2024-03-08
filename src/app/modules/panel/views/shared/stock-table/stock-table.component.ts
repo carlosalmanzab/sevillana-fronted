@@ -37,7 +37,7 @@ import { MenuActionTableService } from '@views/shared/menu-action-table/service/
 	templateUrl: './stock-table.component.html',
 	styleUrl: './stock-table.component.scss'
 })
-export class StockTableComponent extends Unsubscribe implements OnInit, DoCheck {
+export default class StockTableComponent extends Unsubscribe implements OnInit, DoCheck {
 	private menuATService = inject(MenuActionTableService);
 	// contenido de la tabla
 	articulos: ArticuloEntrada[] | ArticuloSalida[] | ArticuloStock[] = [];

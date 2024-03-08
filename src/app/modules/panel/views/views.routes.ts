@@ -34,7 +34,11 @@ export const VIEWS_ROUTES: Routes = [
 	{
 		path: viewsPath.inventario_materia_prima.path,
 		title: viewsPath.inventario_materia_prima.title,
-		loadComponent: () => import('@views/inventario-materia-prima/inventario-materia-prima.component')
+		loadComponent: () => import('@views/inventario-materia-prima/inventario-materia-prima.component'),
+		loadChildren: () =>
+			import('@views/inventario-materia-prima/inventario-materia-prima.routes').then(
+				(r) => r.INVETARIO_MATERIA_PRIMA_ROUTES
+			)
 	},
 	{
 		path: viewsPath.control_nomina.path,
