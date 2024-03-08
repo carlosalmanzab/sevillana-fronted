@@ -20,7 +20,22 @@ export const client = {
 			ingresos_egresos: {
 				path: 'ingresos-egresos',
 				relative: './ingresos-egresos',
-				fullpath: '/home/ingresos-egresos'
+				fullpath: '/home/ingresos-egresos',
+				stock: {
+					path: 'stock',
+					relative: './stock',
+					fullpath: '/home/ingresos-egresos/stock'
+				},
+				entrada: {
+					path: 'entrada',
+					relative: './entrada',
+					fullpath: '/home/ingresos-egresos/entrada'
+				},
+				salida: {
+					path: 'salida',
+					relative: './salida',
+					fullpath: '/home/ingresos-egresos/salida'
+				}
 			},
 			control_inventario: {
 				path: 'control-inventario',

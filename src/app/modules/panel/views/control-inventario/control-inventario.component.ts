@@ -4,8 +4,6 @@ import { client } from '@endpoints';
 import { I_ARTICULO_SERVICE_TOKEN } from '@tokens';
 
 import { DynamicTabsComponent } from '@views/shared/dynamic-tabs/dynamic-tabs.component';
-import { MenuActionTableComponent } from '@views/shared/menu-action-table/menu-action-table.component';
-import { StockTableComponent } from '@views/shared/stock-table/stock-table.component';
 import { MenuItem } from 'primeng/api';
 import { ControlInventarioArticuloService } from './services/control-inventario-articulo.service';
 
@@ -14,7 +12,7 @@ import { ControlInventarioArticuloService } from './services/control-inventario-
 	standalone: true,
 	templateUrl: './control-inventario.component.html',
 	styleUrl: './control-inventario.component.scss',
-	imports: [StockTableComponent, MenuActionTableComponent, DynamicTabsComponent, RouterOutlet, RouterLink],
+	imports: [DynamicTabsComponent, RouterOutlet, RouterLink],
 	providers: [{ provide: I_ARTICULO_SERVICE_TOKEN, useClass: ControlInventarioArticuloService }]
 })
 export default class ControlInventarioComponent {
