@@ -1,61 +1,64 @@
 import { Routes } from '@angular/router';
+import { client } from '@endpoints';
+
+const viewsPath = client.routes.home;
 
 export const VIEWS_ROUTES: Routes = [
 	{
-		path: 'dashboard',
-		title: 'Dashboard',
-		loadComponent: () => import('@modules/panel/views/dashboard/dashboard.component')
+		path: viewsPath.dashboard.path,
+		title: viewsPath.dashboard.title,
+		loadComponent: () => import('@views/dashboard/dashboard.component')
 	},
 	{
-		path: 'calendar',
-		title: 'Calendario',
-		loadComponent: () => import('@modules/panel/views/calendar/calendar.component')
+		path: viewsPath.calendario.path,
+		title: viewsPath.calendario.title,
+		loadComponent: () => import('@views/calendar/calendar.component')
 	},
 	{
-		path: 'ingresos-egresos',
-		title: 'Ingresos & Egresos',
+		path: viewsPath.ingresos_egresos.path,
+		title: viewsPath.ingresos_egresos.title,
 		loadComponent: () => import('@views/ingresos-egresos/ingresos-egresos.component')
 	},
 	{
-		path: 'control-inventario',
-		title: 'Control de Inventario',
+		path: viewsPath.control_inventario.path,
+		title: viewsPath.control_inventario.title,
 		loadComponent: () => import('@views/control-inventario/control-inventario.component'),
 		loadChildren: () =>
 			import('@views/control-inventario/control-inventario.routes').then((r) => r.CONTROL_INVETARIO_ROUTES)
 	},
 	{
-		path: 'cuentas-cobrar',
-		title: 'Cuentas por Cobrar',
-		loadComponent: () => import('@modules/panel/views/cuentas-por-cobrar/cuentas-por-cobrar.component')
+		path: viewsPath.cuentas_cobrar.path,
+		title: viewsPath.cuentas_cobrar.title,
+		loadComponent: () => import('@views/cuentas-por-cobrar/cuentas-por-cobrar.component')
 	},
 	{
-		path: 'inventario-materia-prima',
-		title: 'Inventario de Materia Prima',
-		loadComponent: () => import('@modules/panel/views/inventario-materia-prima/inventario-materia-prima.component')
+		path: viewsPath.inventario_materia_prima.path,
+		title: viewsPath.inventario_materia_prima.title,
+		loadComponent: () => import('@views/inventario-materia-prima/inventario-materia-prima.component')
 	},
 	{
-		path: 'control-nomina',
-		title: 'Control de Nomina',
-		loadComponent: () => import('@modules/panel/views/control-nomina/control-nomina.component')
+		path: viewsPath.control_nomina.path,
+		title: viewsPath.control_nomina.title,
+		loadComponent: () => import('@views/control-nomina/control-nomina.component')
 	},
 	{
-		path: 'clientes',
-		title: 'Clientes',
-		loadComponent: () => import('@modules/panel/views/clientes/clientes.component')
+		path: viewsPath.clientes.path,
+		title: viewsPath.clientes.title,
+		loadComponent: () => import('@views/clientes/clientes.component')
 	},
 	{
-		path: 'empleados',
-		title: 'Empleados',
-		loadComponent: () => import('@modules/panel/views/empleados/empleados.component')
+		path: viewsPath.empleados.path,
+		title: viewsPath.empleados.title,
+		loadComponent: () => import('@views/empleados/empleados.component')
 	},
 	{
-		path: 'proveedores',
-		title: 'Proveedores',
-		loadComponent: () => import('@modules/panel/views/proveedores/proveedores.component')
+		path: viewsPath.proveedores.path,
+		title: viewsPath.proveedores.title,
+		loadComponent: () => import('@views/proveedores/proveedores.component')
 	},
 	{
 		path: '',
 		pathMatch: 'full',
-		redirectTo: 'dashboard'
+		redirectTo: viewsPath.dashboard.path
 	}
 ];
