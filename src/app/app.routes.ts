@@ -19,7 +19,7 @@ export const routes: Routes = [
 	{
 		path: 'home',
 		component: HomeComponent,
-		loadChildren: () => import('@modules/panel/views/views.routes').then((r) => r.routes)
+		loadChildren: () => import('@modules/panel/views/views.routes').then((r) => r.VIEWS_ROUTES)
 	},
 	{ path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
