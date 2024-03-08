@@ -10,7 +10,7 @@ export const client = {
 			 * Ruta de autenticación.
 			 * @property {string} '/auth'
 			 */
-			path: '/auth',
+			path: 'auth',
 			/**
 			 * Configuración para la página de inicio de sesión.
 			 * @property {Object} login
@@ -65,7 +65,7 @@ export const client = {
 			/**
 			 * @property {string} home.path - Ruta relativa para la página de inicio.
 			 */
-			path: '/home',
+			path: 'home',
 			/**
 			 * @property {Object} home.dashboard - Configuración para el dashboard de la página de inicio.
 			 */
