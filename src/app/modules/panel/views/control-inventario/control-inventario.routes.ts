@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [
+export const CONTROL_INVETARIO_ROUTES: Routes = [
 	{
 		path: 'stock',
 		loadComponent: () =>

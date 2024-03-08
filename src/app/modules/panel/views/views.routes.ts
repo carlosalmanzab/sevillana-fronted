@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [
+export const VIEWS_ROUTES: Routes = [
 	{
 		path: 'dashboard',
 		title: 'Dashboard',
@@ -14,14 +14,14 @@ export const routes: Routes = [
 	{
 		path: 'ingresos-egresos',
 		title: 'Ingresos & Egresos',
-		loadComponent: () => import('@modules/panel/views/ingresos-egresos/ingresos-egresos.component')
+		loadComponent: () => import('@views/ingresos-egresos/ingresos-egresos.component')
 	},
 	{
 		path: 'control-inventario',
 		title: 'Control de Inventario',
-		loadComponent: () => import('@modules/panel/views/control-inventario/control-inventario.component'),
+		loadComponent: () => import('@views/control-inventario/control-inventario.component'),
 		loadChildren: () =>
-			import('@modules/panel/views/control-inventario/control-inventario.routes').then((r) => r.routes)
+			import('@views/control-inventario/control-inventario.routes').then((r) => r.CONTROL_INVETARIO_ROUTES)
 	},
 	{
 		path: 'cuentas-cobrar',
