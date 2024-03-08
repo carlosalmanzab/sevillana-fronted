@@ -1,5 +1,16 @@
 {
-	"conventionalCommits.scopes": ["routes", "views", "home", "endpoints", "domain", "table", "primeng", "service", "ui"],
+	"conventionalCommits.scopes": [
+		"routes",
+		"views",
+		"home",
+		"endpoints",
+		"domain",
+		"table",
+		"primeng",
+		"service",
+		"ui",
+		"endpoints"
+	],
 	"search.exclude": {
 		"**/node_modules": true,
 		"**/bower_components": true,
